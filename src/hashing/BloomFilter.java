@@ -36,7 +36,7 @@ public class BloomFilter<K, V> {
 
 	public void put(K key, V value) {
 		int h1 = hashFunction1(key);
-		int i11 = h1 / 8;	//h1 & 0x08
+		int i11 = h1 / 8; // h1 & 0x08
 		int i12 = h1 % 8;
 		b[i11] = (byte) (b[i11] | (1 << (8 - i12 - 1)));
 		int h2 = hashFunction2(key);
@@ -60,31 +60,31 @@ public class BloomFilter<K, V> {
 	private int hashFunction1(K key) {
 		long result = ((randomFunction11 * key.hashCode()) % hashMod + randomFunction12)
 				% hashMod;
-		return (int) (result % (size*8));
+		return (int) (result % (size * 8));
 	}
 
 	private int hashFunction2(K key) {
 		long result = ((randomFunction21 * key.hashCode()) % hashMod + randomFunction22)
 				% hashMod;
-		return (int) (result % (size*8));
+		return (int) (result % (size * 8));
 	}
 
 	private int hashFunction3(K key) {
 		long result = ((randomFunction31 * key.hashCode()) % hashMod + randomFunction32)
 				% hashMod;
-		return (int) (result % (size*8));
+		return (int) (result % (size * 8));
 	}
 
 	private int hashFunction4(K key) {
 		long result = ((randomFunction41 * key.hashCode()) % hashMod + randomFunction42)
 				% hashMod;
-		return (int) (result % (size*8));
+		return (int) (result % (size * 8));
 	}
 
 	private int hashFunction5(K key) {
 		long result = ((randomFunction51 * key.hashCode()) % hashMod + randomFunction52)
 				% hashMod;
-		return (int) (result % (size*8));
+		return (int) (result % (size * 8));
 	}
 
 	public boolean isThere(K key) {
@@ -111,17 +111,17 @@ public class BloomFilter<K, V> {
 		flag = flag && (b[i51] & 1 << (8 - i52 - 1)) != 0;
 		return flag;
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		BloomFilter<Integer, Integer> bf = new BloomFilter<>(541);
-		for(int i=0; i<250; i++){
+		for (int i = 0; i < 250; i++) {
 			bf.put(i, i);
 		}
-		for(int i=300; i<400; i++){
+		for (int i = 300; i < 400; i++) {
 			bf.put(i, i);
 		}
-		for(int i=0; i<500; i++){
-			System.out.println(i+" "+bf.isThere(i));
+		for (int i = 0; i < 500; i++) {
+			System.out.println(i + " " + bf.isThere(i));
 		}
 	}
 }
